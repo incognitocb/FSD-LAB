@@ -1,0 +1,79 @@
+10. c) Implement an Angular application to demonstrate on Angular
+ Service.
+
+Source code:
+
+student.service.ts
+
+import { Injectable } from '@angular/core';
+@Injectable()
+export class StudentService {
+ getStudents(): any[] {
+ return [
+ {
+ ID: 'std101', FirstName: 'Preety', LastName: 'Tiwary',
+ Branch: 'CSE', DOB: '29/02/1988', Gender: 'Female'
+ },
+ {
+ ID: 'std102', FirstName: 'Anurag', LastName: 'Mohanty',
+ Branch: 'ECE', DOB: '23/05/1989', Gender: 'Male'
+ },
+ {
+ ID: 'std103', FirstName: 'Priyanka', LastName: 'Dewangan',
+ Branch: 'CSE', DOB: '24/07/1992', Gender: 'Female'
+ },
+ {
+ ID: 'std104', FirstName: 'Hina', LastName: 'Sharma',
+ Branch: 'EEE', DOB: '19/08/1990', Gender: 'Female'
+ },
+ {
+ ID: 'std105', FirstName: 'Sambit', LastName: 'Satapathy',
+ Branch: 'CSE', DOB: '12/94/1991', Gender: 'Male'
+ }
+ ];
+ }
+}
+
+app.component.ts
+
+import { Component} from '@angular/core';
+import {StudentService} from './student.service';
+@Component({
+ selector: 'app-root',
+ templateUrl: './app.component.html',
+ styleUrls: ['./app.component.css'],
+ providers:[StudentService]
+})
+export class AppComponent {
+ students: any[];
+ constructor(private _studentService: StudentService) {
+ this.students = this._studentService.getStudents();
+ }
+}
+
+app.component.html
+
+<h2>Angular Service Example</h2>
+<table>
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>First Name</th>
+ <th>Last Name</th>
+ <th>Branch</th>
+ <th>DOB</th>
+ <th>Gender</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr *ngFor='let student of students'>
+ <td>{{student.ID}}</td>
+ <td>{{student.FirstName}}</td>
+ <td>{{student.LastName}}</td>
+ <td>{{student.Branch}}</td>
+ <td>{{student.DOB}}</td>
+ <td>{{student.Gender}}</td>
+ </tr>
+ </tbody>
+ </table>
+

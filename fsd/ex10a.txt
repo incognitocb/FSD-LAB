@@ -1,0 +1,90 @@
+10. a) Implement an Angular application to demonstrate on Databinding 
+ (Event Binding)
+ Create a component event bind using 
+ “ng g component eventbind”
+
+Source code:
+
+eventbind.component.ts:
+
+import { Component, OnInit } from '@angular/core';
+@Component({
+ selector: 'app-eventbind',
+ templateUrl: './eventbind.component.html',
+ styleUrls: ['./eventbind.component.css']
+})
+export class EventbindComponent implements OnInit {
+ constructor() { }
+ ngOnInit(): void {
+ }
+ ColumnSpan: number = 2;
+ FirstName: string = 'Khumaini';
+ LastName: string = "Shaik";
+ Branch : String = "CSE";
+ Mobile: number = 24589;
+ Gender: string = "Male";
+ Age: number = 21;
+ ShowDetails: boolean = false;
+ ToggleDetails(): void {
+ this.ShowDetails = !this.ShowDetails;
+ }
+}
+
+eventbind.component.html:
+
+<table>
+ <thead>
+ <tr>
+ <th attr.colspan="{{ColumnSpan}}">
+ Student Details
+ </th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>First Name</td>
+ <td>{{FirstName}}</td>
+ </tr>
+ <tr>
+ <td>Last Name</td>
+ <td>{{LastName}}</td>
+ </tr>
+ <tr *ngIf='ShowDetails'>
+ <td>Branch</td>
+ <td>{{Branch}}</td>
+ </tr>
+ <tr *ngIf='ShowDetails'>
+ <td>Mobile</td>
+ <td>{{Mobile}}</td>
+ </tr>
+ <tr *ngIf='ShowDetails'>
+ <td>Gender</td>
+ <td>{{Gender}}</td>
+ </tr>
+ <tr *ngIf='ShowDetails'>
+ <td>Age</td>
+ <td>{{Age}}</td>
+ </tr>
+ </tbody>
+</table>
+<br />
+<button (click)='ToggleDetails()'>
+ {{ShowDetails ? 'Hide' : 'Show'}} Details
+</button>
+
+eventbind.component.css:
+
+table {
+ border: 1px solid black;
+}
+td {
+ border: 1px solid black;
+}
+
+app.component.html:
+
+<div>
+ <app-eventbind></app-eventbind>
+</div>
+
+
